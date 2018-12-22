@@ -1,0 +1,33 @@
+.form {
+    background-color: #00b8e2;
+    display: flex;
+    justify-content: center;
+    padding: 24px 20px;
+
+    @media only screen and (max-device-width: 823px) {
+        flex-flow: column;
+    }
+
+    > .primary-input {
+        font-size: 14px;
+        padding: 20px 0px 14px 15px;
+        margin-right: 10px;
+        width: 25%;
+
+        @media only screen and (max-device-width: 823px) {
+            margin: 0px 0px 20px 0px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    > .primary-button {
+        font-size: 20px;
+        padding: 14px 0px 11px 0px;
+        width: 120px;
+
+        @media only screen and (max-device-width: 823px) {
+            width: 100%;
+        }
+    }
+}
