@@ -1,0 +1,25 @@
+.data {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+
+    > .title {
+        .main {
+            font-size: 30px;
+        }
+
+        .sub {
+            font-size: 16px;
+        }
+
+        .main,
+        .sub {
+            color: #394b50;
+        }
+    }
+
+    > .content {
+        display: flex;
+        justify-content: space-around;
+    }
+}
