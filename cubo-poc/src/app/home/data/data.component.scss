@@ -21,5 +21,13 @@
     > .content {
         display: flex;
         justify-content: space-around;
+
+        @media only screen and (max-device-width: 823px) {
+            flex-flow: column-reverse;
+
+            .default-table {
+                width: 100%;
+            }
+        }
     }
 }

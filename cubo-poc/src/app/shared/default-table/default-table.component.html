@@ -1,0 +1,23 @@
+<table class="default-table">
+    <caption class="sr-only">
+        {{ captionTable }}
+    </caption>
+    <thead>
+        <tr>
+            <td></td>
+            <th scope="col" *ngFor="let header of tableHeader">
+                {{ header }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data; let index = index">
+            <th scope="row" class="second-header">
+                {{ index + 1}}
+            </th>
+            <td *ngFor="let key of tableKeys">
+                {{ item[key] }}
+            </td>
+        </tr>
+    </tbody>
+</table>

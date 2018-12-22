@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PersonParticipationModel } from '../shared/models/person.model';
 
 @Component({
     selector: 'app-data-form',
@@ -8,4 +9,12 @@ import { Component } from '@angular/core';
     ]
 })
 
-export class DataComponent { }
+export class DataComponent {
+    @Input() persons: PersonParticipationModel[];
+
+    headerTable: string[] = [
+        'First name',
+        'Last name',
+        'Participation'
+    ];
+}
