@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { DonutDataModel } from './donut.model';
+import { DonutCustomizeModel } from './donut-customize.model';
 
 @Component({
     selector: 'app-donut-chart',
@@ -8,4 +10,31 @@ import { Component } from '@angular/core';
     ]
 })
 
-export class DonutChartComponent { }
+export class DonutChartComponent implements OnChanges {
+    @Input() data: DonutDataModel[];
+
+    customChart: DonutCustomizeModel = {
+        view: [
+            280,
+            280
+        ],
+        scheme: {
+            domain: [
+                '#bcc2c7',
+                '#9c56b8',
+                '#ea4b35',
+                '#15ba9a',
+                '#2c96dd'
+            ]
+        },
+        results: [],
+        legend: false,
+        labels: false,
+        doughnut: true,
+        tooltipDisabled: true
+    };
+
+    ngOnChanges() {
+        this.customChart.results = this.data;
+    }
+}

@@ -1,1 +1,18 @@
-<h1>Donut works !</h1>
+<div class="doughnut-chart">
+    <ngx-charts-pie-chart
+        class="chart"
+        [view]="customChart.view"
+        [scheme]="customChart.scheme"
+        [results]="customChart.results"
+        [legend]="customChart.legend"
+        [labels]="customChart.labels"
+        [doughnut]="customChart.doughnut"
+        [tooltipDisabled]="customChart.tooltipDisabled">
+  </ngx-charts-pie-chart>
+  <div class="legend">
+      <div *ngFor="let legend of customChart.results; let index = index" class="row">
+        <div class="icon" [style.background-color]="customChart.scheme.domain[index]"></div>
+        <div [style.color]="customChart.scheme.domain[index]">{{ legend.name }}</div>
+      </div>
+  </div>
+</div>
