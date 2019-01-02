@@ -1,38 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PersonParticipationModel } from './shared/models/person.model';
+import { HomeService } from './services/home.service';
 
 @Component({
     selector: 'app-home-component',
     templateUrl: './home.component.html'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-    persons: PersonParticipationModel[] =  [
-        {
-            firstName: 'Carlos',
-            lastName: 'Moura',
-            participation: 5
-        },
-        {
-            firstName: 'Fernanda',
-            lastName: 'Oliveira',
-            participation: 15
-        },
-        {
-            firstName: 'Hugo',
-            lastName: 'Silva',
-            participation: 20
-        },
-        {
-            firstName: 'Eliza',
-            lastName: 'Souza',
-            participation: 20
-        },
-        {
-            firstName: 'Anderson',
-            lastName: 'Santos',
-            participation: 40
-        }
-    ];
+    persons: PersonParticipationModel[] = [];
+    error: boolean;
+    loading: boolean;
+
+    constructor(
+        private homeService: HomeService
+    ) { }
+
+    ngOnInit() {
+        this.getParticipationList();
+    }
+
+    getParticipationList(): void {
+        this.loading = true;
+        this.error = false;
+
+        this.homeService.getParticipationList()
+            .subscribe(data => {
+                this.persons = data;
+
+                this.loading = false;
+            }, error => {
+                this.error = true;
+                console.log(error);
+
+                this.loading = false;
+            });
+    }
+
 }

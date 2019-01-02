@@ -17,8 +17,10 @@ export class DefaultTableComponent implements OnChanges {
     tableKeys: string[] = [];
 
     ngOnChanges() {
-        this.tableKeys = Object.keys(this.data[0]);
-        this.tableHeader = this.headerTable || this.tableKeys;
+        if (this.data.length > 0) {
+            this.tableKeys = Object.keys(this.data[0]);
+            this.tableHeader = this.headerTable || this.tableKeys;
+        }
     }
 
 }

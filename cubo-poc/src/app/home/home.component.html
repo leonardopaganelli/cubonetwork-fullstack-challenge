@@ -1,5 +1,14 @@
 <div>
     <app-home-form></app-home-form>
-    <app-data-form
-        [persons]="persons"></app-data-form>
+    <div *ngIf="loading">
+        Loading ...
+    </div>
+    <div *ngIf="loading">
+        Error !
+    </div>
+    <div *ngIf="!loading">
+        <app-data-form
+            [persons]="persons"></app-data-form>
+    </div>
+
 </div>
