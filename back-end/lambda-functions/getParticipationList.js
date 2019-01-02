@@ -1,4 +1,5 @@
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
+
     let response = await getData();
 
     return response;
@@ -23,15 +24,12 @@ async function getData() {
 }
 
 function okResponse(data) {
-    return {
-        statusCode: 200,
-        body: JSON.parse(data),
-    };
+    let parseData = JSON.parse(data);
+
+    return parseData.participationList;
 }
 
 function errorResponse(data) {
-    return {
-        statusCode: 500,
-        body: JSON.parse(data),
-    };
+    //TODO: Handle error
+    return JSON.parse(data);
 }
