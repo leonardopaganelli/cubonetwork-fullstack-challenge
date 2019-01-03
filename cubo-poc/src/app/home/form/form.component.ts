@@ -1,7 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-
-
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { customValidators } from './form.validations';
 import { PersonParticipationModel } from '../shared/models/person.model';
 
 @Component({
@@ -24,17 +23,10 @@ export class FormComponent {
     }
 
     private generateForm(): void {
-        const defaultValidation = {
-            validators: [
-                Validators.required
-            ],
-            updateOn: 'blur'
-        };
-
         this.participationForm = this.formBuilder.group({
-            firstName: ['', defaultValidation],
-            lastName: ['', defaultValidation],
-            participation: ['', Validators.required]
+            firstName: ['', customValidators.firstName],
+            lastName: ['', customValidators.lastName],
+            participation: ['', customValidators.participation]
         });
     }
 
