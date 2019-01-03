@@ -1,4 +1,8 @@
 exports.handler = async (event) => {
+    if (isInputInvalid(event)) {
+        return "Invalid input";
+    }
+
     const s3 = getS3Configuration();
 
     let listPerson = await getData(s3);
@@ -9,6 +13,16 @@ exports.handler = async (event) => {
 
     return response;
 };
+
+function isInputInvalid(input) {
+    const keysInput = ["firstName", "lastName", "participation"];
+
+    const valid = Object.keys(input).every((item, index) => {
+        return item === keysInput[index]
+    });
+
+    return !valid;
+}
 
 function getS3Configuration() {
     const aws = require('aws-sdk');
@@ -34,7 +48,7 @@ async function getData(s3) {
 
 async function updateData(personList, s3) {
     let params = getObjectParams();
-    
+
     params.Body = Buffer.from(JSON.stringify(personList));
 
     return await s3.putObject(params)
