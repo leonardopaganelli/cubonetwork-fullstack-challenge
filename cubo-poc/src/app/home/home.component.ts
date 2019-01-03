@@ -38,4 +38,20 @@ export class HomeComponent implements OnInit {
             });
     }
 
+    insertParticipation(dataParticipation: PersonParticipationModel): void {
+        this.loading = true;
+        this.error = false;
+
+        this.homeService.insertParticipation(dataParticipation)
+            .subscribe(data => {
+                this.persons = data;
+
+                this.loading = false;
+            }, error => {
+                this.error = true;
+                console.log(error);
+
+                this.loading = false;
+            });
+    }
 }

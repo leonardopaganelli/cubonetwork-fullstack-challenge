@@ -1,6 +1,18 @@
-<div class="form">
-    <input class="primary-input" id="input-first-name" placeholder="First name"/>
-    <input class="primary-input" id="input-last-name" placeholder="Last name"/>
-    <input class="primary-input" id="input-participation" placeholder="Participation"/>
-    <button class="primary-button">SEND</button>
-</div>
+<form class="form" [formGroup]="participationForm" (ngSubmit)="submitForm()">
+    <input class="primary-input"
+        id="firstName"
+        placeholder="First name"
+        formControlName="firstName" required/>
+    <input class="primary-input"
+        id="lastName"
+        placeholder="Last name"
+        formControlName="lastName" required/>
+    <input type="number"
+        class="primary-input"
+        id="participation"
+        placeholder="Participation"
+        formControlName="participation" required/>
+    <button class="primary-button"
+        type="submit"
+        [disabled]="!participationForm.valid">SEND</button>
+</form>

@@ -1,12 +1,13 @@
 <div>
-    <app-home-form></app-home-form>
+    <app-home-form
+        (emitData)="insertParticipation($event)"></app-home-form>
     <div *ngIf="loading">
         Loading ...
     </div>
-    <div *ngIf="loading">
+    <div *ngIf="error && !loading">
         Error !
     </div>
-    <div *ngIf="!loading">
+    <div *ngIf="!loading && !error">
         <app-data-form
             [persons]="persons"></app-data-form>
     </div>

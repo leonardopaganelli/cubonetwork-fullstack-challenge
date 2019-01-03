@@ -24,7 +24,10 @@ export class DonutChartComponent implements OnChanges {
                 '#9c56b8',
                 '#ea4b35',
                 '#15ba9a',
-                '#2c96dd'
+                '#2c96dd',
+                '#f4f806',
+                '#f86a06',
+                '#875203'
             ]
         },
         results: [],

@@ -13,4 +13,8 @@ export class HomeService {
     getParticipationList(): Observable<PersonParticipationModel[]> {
         return this.http.get<PersonParticipationModel[]>(`${environment.apiBase}/list-participation`);
     }
+
+    insertParticipation(person: PersonParticipationModel): Observable<PersonParticipationModel[]> {
+        return this.http.post<PersonParticipationModel[]>(`${environment.apiBase}/list-participation`, person);
+    }
 }
