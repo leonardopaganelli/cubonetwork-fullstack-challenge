@@ -1,26 +1,31 @@
 exports.handler = async (event, context) => {
-
     let response = await getData();
 
     return response;
 };
 
 async function getData() {
-    const aws = require('aws-sdk');
-    const s3 = new aws.S3();
+    const s3 = getS3Configuration();
 
-    var getParams = {
-        Bucket: 'poc-cubo',
-        Key: 'data/data.json'
-    }
-
-    return await s3.getObject(getParams)
+    return await s3.getObject(getObjectParams())
         .promise()
         .then(function(data) {
             return okResponse(data.Body.toString('utf8'));
         }).catch(function(err) {
             return errorResponse(err);
         });
+}
+
+function getS3Configuration() {
+    const aws = require('aws-sdk');
+    return new aws.S3();
+}
+
+function getObjectParams() {
+    return {
+        Bucket: 'poc-cubo',
+        Key: 'data/data.json'
+    }
 }
 
 function okResponse(data) {
