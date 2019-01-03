@@ -3,7 +3,7 @@ import { PersonParticipationModel } from '../shared/models/person.model';
 import { DonutDataModel } from '../../shared/donut-chart/donut.model';
 
 @Component({
-    selector: 'app-data-form',
+    selector: 'app-data-visualization',
     templateUrl: './data.component.html',
     styleUrls: [
         './data.component.scss'
