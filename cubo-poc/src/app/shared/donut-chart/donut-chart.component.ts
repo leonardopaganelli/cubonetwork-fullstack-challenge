@@ -38,6 +38,26 @@ export class DonutChartComponent implements OnChanges {
     };
 
     ngOnChanges() {
-        this.customChart.results = this.data;
+        this.customChart.results = this.data.length > 5
+            ? this.treatItensBiggerThanFive(this.data)
+            : this.data;
+    }
+
+    treatItensBiggerThanFive(data: DonutDataModel[]): DonutDataModel[] {
+        const orderedArray = this.data.sort((a, b) => b.value - a.value);
+
+        const baseArray = orderedArray.slice(0, 5);
+
+        const othersValueReduced =  orderedArray.slice(5, orderedArray.length)
+            .map(item => item.value)
+            .reduce((acc, cv) => acc + cv);
+
+        return [
+            ...baseArray,
+            {
+                name: 'others',
+                value: othersValueReduced
+            }
+        ];
     }
 }
