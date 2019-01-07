@@ -20,7 +20,7 @@ export class DataComponent implements OnChanges {
     ];
 
     ngOnChanges() {
-        if (this.persons.length > 0) {
+        if (this.persons && this.persons.length > 0) {
             this.donutData = this.persons.map(this.mapDonutData);
         }
     }

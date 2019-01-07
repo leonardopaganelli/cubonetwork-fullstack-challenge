@@ -17,7 +17,7 @@ export class DefaultTableComponent implements OnChanges {
     keysTable: string[] = [];
 
     ngOnChanges() {
-        if (this.data.length > 0 && typeof this.data[0] === 'object') {
+        if (this.data && this.data.length > 0 && typeof this.data[0] === 'object') {
             this.keysTable = Object.keys(this.data[0]);
             this.headerTable = this.customHeaderTable || this.keysTable;
         }

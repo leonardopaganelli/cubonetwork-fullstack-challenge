@@ -38,7 +38,7 @@ export class DonutChartComponent implements OnChanges {
     };
 
     ngOnChanges() {
-        if (this.data.length > 0) {
+        if (this.data && this.data.length > 0) {
             this.customChart.results = this.data.length > 5
             ? this.treatArrayBiggerThanFive(this.data)
             : this.data;
