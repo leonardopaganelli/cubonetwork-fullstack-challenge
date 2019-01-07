@@ -11,7 +11,7 @@ import { DonutCustomizeModel } from './donut-customize.model';
 })
 
 export class DonutChartComponent implements OnChanges {
-    @Input() data: DonutDataModel[];
+    @Input() data: DonutDataModel[] = [];
 
     customChart: DonutCustomizeModel = {
         view: [
@@ -38,12 +38,14 @@ export class DonutChartComponent implements OnChanges {
     };
 
     ngOnChanges() {
-        this.customChart.results = this.data.length > 5
-            ? this.treatItensBiggerThanFive(this.data)
+        if (this.data.length > 0) {
+            this.customChart.results = this.data.length > 5
+            ? this.treatArrayBiggerThanFive(this.data)
             : this.data;
+        }
     }
 
-    treatItensBiggerThanFive(data: DonutDataModel[]): DonutDataModel[] {
+    private treatArrayBiggerThanFive(data: DonutDataModel[]): DonutDataModel[] {
         const orderedArray = this.data.sort((a, b) => b.value - a.value);
 
         const baseArray = orderedArray.slice(0, 5);
