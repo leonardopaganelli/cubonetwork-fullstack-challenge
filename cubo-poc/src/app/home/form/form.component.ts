@@ -26,7 +26,7 @@ export class FormComponent {
         this.participationForm = this.formBuilder.group({
             firstName: ['', customValidators.firstName],
             lastName: ['', customValidators.lastName],
-            participation: ['', customValidators.participation]
+            participation: [0, customValidators.participation]
         });
     }
 
