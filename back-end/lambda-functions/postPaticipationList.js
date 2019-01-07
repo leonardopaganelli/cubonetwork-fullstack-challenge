@@ -66,14 +66,14 @@ function addPersonToList(newPerson, personList) {
     const alreadyExist = list.some(person => {
     	const { firstName, lastName } = person;
 
-    	return `${firstName}${lastName}`.trim() === `${newPerson.firstName}${newPerson.lastName}`.trim();
+    	return `${firstName}${lastName}`.trim().toLocaleLowerCase() === `${newPerson.firstName}${newPerson.lastName}`.trim().toLocaleLowerCase();
     });
 
     if (alreadyExist) {
         const index = list.findIndex(person => {
             const { firstName, lastName } = person;
 
-    	    return `${firstName}${lastName}`.trim() === `${newPerson.firstName}${newPerson.lastName}`.trim();
+            return `${firstName}${lastName}`.trim().toLocaleLowerCase() === `${newPerson.firstName}${newPerson.lastName}`.trim().toLocaleLowerCase();
         });
 
         list[index].participation += newPerson.participation;
