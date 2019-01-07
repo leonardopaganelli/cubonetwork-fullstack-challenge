@@ -25,7 +25,7 @@ export class DataComponent implements OnChanges {
         }
     }
 
-    mapDonutData(data: PersonParticipationModel): DonutDataModel {
+    private mapDonutData(data: PersonParticipationModel): DonutDataModel {
         return {
             name: `${data.firstName} ${data.lastName}`,
             value: data.participation
