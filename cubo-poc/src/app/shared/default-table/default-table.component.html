@@ -1,11 +1,11 @@
 <table class="default-table">
-    <caption class="sr-only">
+    <caption class="sr-only" *ngIf="captionTable">
         {{ captionTable }}
     </caption>
     <thead>
         <tr>
             <td></td>
-            <th scope="col" *ngFor="let header of tableHeader">
+            <th scope="col" *ngFor="let header of headerTable">
                 {{ header }}
             </th>
         </tr>
@@ -15,7 +15,7 @@
             <th scope="row" class="second-header">
                 {{ index + 1}}
             </th>
-            <td *ngFor="let key of tableKeys">
+            <td *ngFor="let key of keysTable">
                 {{ item[key] }}
             </td>
         </tr>

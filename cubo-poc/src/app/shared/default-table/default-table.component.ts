@@ -10,16 +10,16 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 export class DefaultTableComponent implements OnChanges {
     @Input() data = [];
-    @Input() headerTable?: string[];
-    @Input() captionTable: string;
+    @Input() customHeaderTable?: string[];
+    @Input() captionTable?: string;
 
-    tableHeader: string[] = [];
-    tableKeys: string[] = [];
+    headerTable: string[] = [];
+    keysTable: string[] = [];
 
     ngOnChanges() {
-        if (this.data.length > 0) {
-            this.tableKeys = Object.keys(this.data[0]);
-            this.tableHeader = this.headerTable || this.tableKeys;
+        if (this.data.length > 0 && typeof this.data[0] === 'object') {
+            this.keysTable = Object.keys(this.data[0]);
+            this.headerTable = this.customHeaderTable || this.keysTable;
         }
     }
 
