@@ -1,15 +1,14 @@
 exports.handler = async (event) => {
-    if (isInputInvalid(event)) {
+    if (isInputInvalid(event))
         return "Invalid input";
-    }
 
-    const s3 = getS3Configuration();
+    const aws = require('aws-sdk');
 
-    let listPerson = await getData(s3);
+    let listPerson = await getData(aws);
 
     listPerson = await addPersonToList(event, listPerson);
 
-    const response = await updateData(listPerson, s3);
+    const response = await updateData(listPerson, aws);
 
     return response;
 };
@@ -24,11 +23,6 @@ function isInputInvalid(input) {
     return !valid;
 }
 
-function getS3Configuration() {
-    const aws = require('aws-sdk');
-    return new aws.S3();
-}
-
 function getObjectParams() {
     return {
         Bucket: 'poc-cubo',
@@ -36,17 +30,21 @@ function getObjectParams() {
     }
 }
 
-async function getData(s3) {
-    return await s3.getObject(getObjectParams())
-        .promise()
-        .then(function(data) {
-            return JSON.parse(data.Body.toString('utf8'));
-        }).catch(function(err) {
-            return err;
-        });
+async function getData(aws) {
+    var lambda = new aws.Lambda();
+    const getDataLambda = 'Cubo-Poc-getParticipationList';
+
+    lambda.invoke({
+      FunctionName: getDataLambda
+    }, function(error, data) {
+        return error
+            ? error
+            : data.Payload;
+    });
 }
 
-async function updateData(personList, s3) {
+async function updateData(personList, aws) {
+    const s3 = new aws.S3();
     let params = getObjectParams();
 
     params.Body = Buffer.from(JSON.stringify(personList));
@@ -63,17 +61,19 @@ async function updateData(personList, s3) {
 function addPersonToList(newPerson, personList) {
     let list = personList.participationList;
 
+    const newPersonTreated = `${newPerson.firstName}${newPerson.lastName}`.trim().toLocaleLowerCase();
+
     const alreadyExist = list.some(person => {
     	const { firstName, lastName } = person;
 
-    	return `${firstName}${lastName}`.trim().toLocaleLowerCase() === `${newPerson.firstName}${newPerson.lastName}`.trim().toLocaleLowerCase();
+    	return `${firstName}${lastName}`.trim().toLocaleLowerCase() === newPersonTreated;
     });
 
     if (alreadyExist) {
         const index = list.findIndex(person => {
             const { firstName, lastName } = person;
 
-            return `${firstName}${lastName}`.trim().toLocaleLowerCase() === `${newPerson.firstName}${newPerson.lastName}`.trim().toLocaleLowerCase();
+    	return `${firstName}${lastName}`.trim().toLocaleLowerCase() === newPersonTreated;
         });
 
         list[index].participation += newPerson.participation;
